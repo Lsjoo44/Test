@@ -1,0 +1,9 @@
+# torch / torchvision 은 VESSL PyTorch 이미지에 설치된 것을 사용
+segmentation-models-pytorch>=0.3
+scikit-image
+scipy
+opencv-python-headless
+pandas
+pyyaml
+matplotlib
+tqdm

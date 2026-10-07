@@ -1,0 +1,6 @@
+# smoke: 2 epoch 짧은 확인용 (시간 측정). 실제 데이터로: python -m src.train --config configs/smoke.yaml
+exp_name: smoke
+data_root: data/ocelot2023_v1.0.1
+epochs: 2
+val_every: 1
+val_limit: 20

@@ -1,0 +1,26 @@
+# T1: (best of S) + tissue dropout p=0.3  ※ S1~S3 결과 보고 stain 값을 best 로 바꿀 것
+exp_name: T1
+data_root: data/ocelot2023_v1.0.1
+encoder: resnet50
+encoder_weights: imagenet      # Lunit SSL 로 바꾸려면 아래 encoder_ckpt 주석 해제
+# encoder_ckpt: lunit_bt       # lunit_bt | lunit_mocov2 | lunit_swav (자동 다운로드, 정규화도 자동 변경)
+fusion: input
+detach_tissue: true
+tissue_dropout: 0.3
+cell_target: disk
+disk_radius: 7
+geometric: true
+photometric: true
+stain: paired
+exclude_noisy: false
+cell_crop: 512
+tissue_crop: 512
+batch_size: 8
+num_workers: 8
+epochs: 100
+lr: 1.0e-4
+encoder_lr_scale: 1.0
+lambda_tissue: 1.0
+amp: true
+val_every: 2
+seed: 42

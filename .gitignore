@@ -1,0 +1,9 @@
+data/
+checkpoints/
+results/
+third_party/
+__pycache__/
+*.pyc
+*.pth
+nohup.out
+*.log
