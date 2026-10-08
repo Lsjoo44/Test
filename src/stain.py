@@ -7,7 +7,7 @@
 - macenko    : 증강이 아니라 '정규화'(색 통일). train/val/test 모두 같은 기준 색으로 변환.
 """
 import numpy as np
-from skimage.color import hed2rgb, rgb2hed
+from skimage.color import hed2rgb
 
 
 # ---------------------------------------------------------------------------
@@ -19,9 +19,20 @@ def sample_hed_params(rng, sigma_alpha, sigma_beta):
     return alpha, beta
 
 
+_HED_FROM_RGB = np.linalg.inv(np.array([[0.65, 0.70, 0.29],
+                                         [0.07, 0.99, 0.11],
+                                         [0.27, 0.57, 0.78]]))
+_LOG_ADJUST = np.log(1e-6)
+
+
 def hed_jitter(img, alpha, beta):
-    """img: (H, W, 3) uint8 -> uint8."""
-    hed = rgb2hed(img)
+    """img: (H, W, 3) uint8 -> uint8.
+
+    skimage.rgb2hed 는 음수 stain 값을 0 으로 잘라서 alpha=1, beta=0 이어도 원본으로 안 돌아온다.
+    여기서는 같은 행렬로 clip 없이 변환해서, 색 변화가 뽑은 (alpha, beta) 에서만 생기게 한다.
+    """
+    x = np.log(np.maximum(img.astype(np.float64) / 255, 1e-6)) / _LOG_ADJUST
+    hed = x @ _HED_FROM_RGB
     hed = hed * alpha + beta
     rgb = hed2rgb(hed)
     return np.clip(np.rint(rgb * 255), 0, 255).astype(np.uint8)

@@ -71,7 +71,9 @@ def test_stain_identity_and_macenko():
     rec = build_records(DUMMY, "train")[0]
     img = load_sample(rec)["cell_img"]
     same = hed_jitter(img, np.ones(3), np.zeros(3))
-    assert np.abs(same.astype(int) - img).mean() < 2.0
+    assert np.abs(same.astype(int) - img).max() <= 1          # 반올림 오차만
+    rnd = np.random.default_rng(0).integers(0, 256, (16, 16, 3)).astype(np.uint8)
+    assert np.abs(hed_jitter(rnd, np.ones(3), np.zeros(3)).astype(int) - rnd).max() <= 1
     out = MacenkoNormalizer()(img)
     assert out.shape == img.shape and out.dtype == np.uint8
 

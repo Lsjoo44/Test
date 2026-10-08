@@ -19,7 +19,7 @@ IMAGENET_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_STD = (0.229, 0.224, 0.225)
 # Lunit benchmark-ssl-pathology README 의 정규화 값
 LUNIT_MEAN = (0.70322989, 0.53606487, 0.66096631)
-LUNIT_STD = (0.21716536, 0.26081574, 0.19938928)
+LUNIT_STD = (0.21716536, 0.26081574, 0.20723464)  # 팀 BASE registry 와 같은 값
 
 LUNIT_URL_PREFIX = "https://github.com/lunit-io/benchmark-ssl-pathology/releases/download/pretrained-weights"
 LUNIT_WEIGHTS = {
