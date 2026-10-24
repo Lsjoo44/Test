@@ -1,0 +1,11 @@
+sipcap_out/
+build/
+dist/
+*.spec
+__pycache__/
+*.pcap
+*.pcapng
+*.wav
+ffmpeg.exe
+bcg729.dll
+bin/
